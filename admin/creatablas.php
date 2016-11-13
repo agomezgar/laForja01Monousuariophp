@@ -3,7 +3,7 @@
    include ("../config.php");
 header("Content-type: text/html; charset=utf-8");
    $link=Conectarse();
-mysqli_set_charset('utf8');
+mysqli_set_charset($link,'utf8');
 
 $crealumnos="CREATE TABLE IF NOT EXISTS alumnos(
 `alumno` varchar( 6 ) NOT NULL ,
@@ -117,7 +117,7 @@ INSERT INTO `competencias` (`id`, `competencia`, `codigo`) VALUES
 (6, 'Competencias Sociales y Cívicas', 'CSC'),
 (7, 'Aprender a Aprender', 'AA');
 ";
-mysqli_query($link,utf8_decode($rellenaCompetencias)) or die ("No he podido rellenar la tabla de competencias");
+mysqli_query($link,$rellenaCompetencias) or die ("No he podido rellenar la tabla de competencias");
 
 $creaPrioridades="
 CREATE TABLE `prioridades` (
@@ -338,7 +338,7 @@ INSERT INTO `estandarestecnologia` (`id`, `curso`, `bloque`, `criterio`, `estand
 (4621, '4', '6. Tecnología y Sociedad', '2. Analizar objetos técnicos y tecnológicos y su relación con el entorno, interpretando su influencia en la sociedad y la evolución tecnológica.', '2.1. Analiza objetos técnicos y tecnológicos desde varios puntos de vista, como el funcional, socioeconómico, técnico y formal.', ''),
 (4631, '4', '6. Tecnología y Sociedad', '3. Potenciar el uso responsable de los recursos naturales para uso industrial y particular, fomentando hábitos que ayuden a la sostenibilidad del medio ambiente.', '3.1. Reconoce las consecuencias medioambientales de la actividad tecnológica y realiza propuestas para reducir su impacto.', '');";
 
-mysqli_query($link,utf8_decode($rellenaestandaresTecnologia))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
+mysqli_query($link,$rellenaestandaresTecnologia)or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 
 //ESTANDARES ROBOTICA
 $crearestandaresRobotica="
@@ -377,7 +377,7 @@ $rellenaestandaresRobotica="INSERT INTO `estandaresrobotica` (`id`, `curso`, `bl
 (4461, 4, '4. ROBÓTICA', '6. Aprender a trabajar en equipo con actitudes de respeto y tolerancia hacia las ideas de los demás participando activamente en la consecución de los objetivos planteados.', '6.1. Trabaja en grupo de forma participativa y creativa, buscando información adicional y aportando ideas para el diseño y construcción de un robot.', '');
 ";
 
-mysqli_query($link,utf8_decode($rellenaestandaresRobotica))or die ("algo fallo...");
+mysqli_query($link,$rellenaestandaresRobotica)or die ("algo fallo...");
 $creargrupos="CREATE TABLE IF NOT EXISTS gruposinf(
 id int(2)unsigned NOT NULL auto_increment,
 `nombre` text NOT NULL ,
@@ -820,7 +820,7 @@ INSERT INTO `estandareslengua` (`id`, `curso`, `bloque`, `criterio`, `estandar`,
 (4463, 4, 'Bloque 4: Educación literaria', '6. Consultar y citar adecuadamente fuentes de información variadas para realizar un trabajo académico en soporte papel o digital sobre un tema del currículo de literatura, adoptando un punto de vista crítico y personal y utilizando las tecnologías de la información', '6.3. Utiliza recursos variados de las Tecnologías de la Información y la Comunicación para la realización de sus trabajos académicos.', '');
 ";
 
-mysqli_query($link,utf8_decode($rellenaestandaresLengua))or die ("algo fallo creando los estandares de lengua...".mysqli_error($link));
+mysqli_query($link,$rellenaestandaresLengua)or die ("algo fallo creando los estandares de lengua...".mysqli_error($link));
 
 
 //ESTANDARES GEOGRAFÍA E HISTORIA
@@ -1338,7 +1338,7 @@ INSERT INTO `estandaresgeografiahistoria` (`id`, `curso`, `bloque`, `criterio`, 
 (41161, 4, 'Bloque 11. La relación entre el pasado, el presente y el futuro a través de la Historia y la Geografía', '6.    Valorar la progresiva interculturalidad del mundo actual.', '6.1.    Analiza el intercambio cultural a lo largo de la historia, y reconoce su impulso en las últimas décadas por la globalización.', ''),
 (41162, 4, 'Bloque 11. La relación entre el pasado, el presente y el futuro a través de la Historia y la Geografía', '6.    Valorar la progresiva interculturalidad del mundo actual.', '6.2.    Establece la relación entre conflictos armados  e intolerancia cultural, e identifica alguno en la actualidad.', '');
 ";
-mysqli_query($link,utf8_decode($rellenaestandaresGeografiahistoria))or die ("NO HE PODIDO RELLENAR LA TABLA DE ESTANDARES DE GEOGRAFIA E HISTORIA".mysqli_error($link));
+mysqli_query($link,$rellenaestandaresGeografiahistoria)or die ("NO HE PODIDO RELLENAR LA TABLA DE ESTANDARES DE GEOGRAFIA E HISTORIA".mysqli_error($link));
 mysqli_free_result;
 $creargrupos="CREATE TABLE IF NOT EXISTS gruposinf(
 id int(2)unsigned NOT NULL auto_increment,
@@ -1479,7 +1479,7 @@ INSERT INTO `materias` (`id`, `materia`, `codigo`, `curso`) VALUES
 (117, 'Griego II', 'griego', 6),
 (118, 'Geografía  ', 'geografiaoptativa', 6);
 ";
-mysqli_query($link,utf8_decode($llenarMaterias))or die ("No he podido rellenar la tabla de materias");
+mysqli_query($link,$llenarMaterias)or die ("No he podido rellenar la tabla de materias");
 mysqli_free_result;
 $crearEvaluacionGeneral="CREATE TABLE IF NOT EXISTS `evaluaciongeneral` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
