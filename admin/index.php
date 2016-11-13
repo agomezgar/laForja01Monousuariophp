@@ -21,6 +21,13 @@ $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+// Vaciar base de datos si existe
+$sql = "DROP DATABASE IF  EXISTS laforja;";
+if ($conn->query($sql) === TRUE) {
+    echo "Base de datos previa borrada";
+} else {
+    echo "Error borrando la base de datos previa: " . $conn->error;
+}
 
 // Create database
 $sql = "CREATE DATABASE IF NOT EXISTS laforja;";
