@@ -287,7 +287,8 @@ INSERT INTO `estandaresmatacademicas` (`id`, `curso`, `bloque`, `criterio`, `est
 (4543, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.3.    Calcula e interpreta los parámetros estadísticos de una distribución de datos utilizando medios tecnológicos, si fuera preciso.', ''),
 (4544, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.4.    Realiza un muestreo y distingue muestras representativas de las que no lo son.', ''),
 (4545, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.5.    Representa diagramas de dispersión e interpreta la relación existente entre las variables.', '');
-";)or die ("algo fallo creando la tabla de estandares de Matemáticas Académicas...".mysqli_error($link));
+";
+mysqli_query($link, $rellenaestandaresMatAcademicas)or die ("algo fallo creando la tabla de estandares de Matemáticas Académicas...".mysqli_error($link));
 
 //ESTANDARES MATEMATICAS APLICADAS
 $crearestandaresMatAplicadas="
