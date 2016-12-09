@@ -287,8 +287,7 @@ INSERT INTO `estandaresmatacademicas` (`id`, `curso`, `bloque`, `criterio`, `est
 (4543, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.3.    Calcula e interpreta los parámetros estadísticos de una distribución de datos utilizando medios tecnológicos, si fuera preciso.', ''),
 (4544, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.4.    Realiza un muestreo y distingue muestras representativas de las que no lo son.', ''),
 (4545, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.5.    Representa diagramas de dispersión e interpreta la relación existente entre las variables.', '');
-";
-mysqli_query($link,utf8_decode($rellenaestandaresMatAcademicas))or die ("algo fallo creando la tabla de estandares de Matemáticas Académicas...".mysqli_error($link));
+";)or die ("algo fallo creando la tabla de estandares de Matemáticas Académicas...".mysqli_error($link));
 
 //ESTANDARES MATEMATICAS APLICADAS
 $crearestandaresMatAplicadas="
@@ -420,7 +419,7 @@ INSERT INTO `estandaresmataplicadas` (`id`, `curso`, `bloque`, `criterio`, `esta
 (4532, 4, 'Bloque 5: Estadística y Probabilidad', '3.    Calcular probabilidades simples y compuestas para resolver problemas de la vida cotidiana, utilizando la regla de Laplace en combinación con técnicas de recuento como los diagramas de árbol y las tablas de contingencia.', '3.2.    Calcula la probabilidad de sucesos compuestos sencillos en los que intervengan dos experiencias aleatorias simultáneas o consecutivas.', '');
 
 ";
-mysqli_query($link,utf8_decode($rellenaestandaresMatAplicadas))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
+mysqli_query($link,$rellenaestandaresMatAplicadas)or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 
 //ESTANDARES MATEMATICAS
 $crearestandaresMatematicas="
@@ -554,7 +553,7 @@ INSERT INTO `estandaresmatematicas` (`id`, `curso`, `bloque`, `criterio`, `estan
 (1522, 1, 'Bloque 5: Estadística', '2.    Utilizar herramientas tecnológicas para organizar datos, generar gráficas estadísticas, calcular parámetros relevantes y comunicar los resultados obtenidos que respondan a las preguntas formuladas previamente sobre la situación estudiada.', '2.2.    Utiliza las tecnologías de la información y de la comunicación para comunicar información resumida y relevante sobre una variable estadística analizada.', '');
 
 ";
-mysqli_query($link,utf8_decode($rellenaestandaresMatematicas))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
+mysqli_query($link,$rellenaestandaresMatematicas)or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 
 
 //ESTANDARES CULTURA CLASICA
@@ -676,7 +675,7 @@ INSERT INTO `estandarescclasica` (`id`, `curso`, `bloque`, `criterio`, `estandar
 (4741, 4, 'Bloque 7: Pervivencia en la actualidad', '4. Realizar trabajos de investigación sobre la pervivencia de la civilización clásica en el entorno utilizando las tecnologías de la información y la comunicación.', '4.1. Utiliza las Tecnologías de la Información y la Comunicación para recoger información y realizar trabajos de investigación sobre la pervivencia de la civilización clásica en nuestra cultura.', '');
 
 ";
-mysqli_query($link,utf8_decode($rellenaestandaresCClasica))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
+mysqli_query($link,$rellenaestandaresCClasica)or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 
 //ESTANDARES TECNOLOGIA
 $crearestandaresTecnologia="

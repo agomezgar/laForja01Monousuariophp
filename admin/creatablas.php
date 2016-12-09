@@ -3,7 +3,7 @@
    include ("../config.php");
 header("Content-type: text/html; charset=utf-8");
    $link=Conectarse();
-mysqli_set_charset($link,'utf8');
+mysqli_set_charset('utf8');
 
 $crealumnos="CREATE TABLE IF NOT EXISTS alumnos(
 `alumno` varchar( 6 ) NOT NULL ,
@@ -40,7 +40,7 @@ PRIMARY KEY ( `alumno` )
 ) ";
 echo "Creando la tabla alumnos";
 mysqli_query($link,$crealumnos) or die ("nO HE PODIDO CREAR LA TABLA DE ALUMNOS
-".mysqli_error($link));
+");
 
 $creamatriculas="CREATE TABLE `matriculas` (
   `alumno` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
@@ -117,7 +117,7 @@ INSERT INTO `competencias` (`id`, `competencia`, `codigo`) VALUES
 (6, 'Competencias Sociales y Cívicas', 'CSC'),
 (7, 'Aprender a Aprender', 'AA');
 ";
-mysqli_query($link,$rellenaCompetencias) or die ("No he podido rellenar la tabla de competencias");
+mysqli_query($link,utf8_decode($rellenaCompetencias)) or die ("No he podido rellenar la tabla de competencias");
 
 $creaPrioridades="
 CREATE TABLE `prioridades` (
@@ -146,6 +146,105 @@ $rellenaestandaresBase="
 ";
 mysqli_query($link,utf8_decode($rellenaestandaresBase))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 */
+//ESTANDARES TDIC
+
+$crearestandaresTdic="
+CREATE TABLE IF NOT EXISTS `estandarestdic` (
+  `id` int(4) DEFAULT NULL,
+  `curso` int(1) DEFAULT NULL,
+  `bloque` varchar(70) DEFAULT NULL,
+  `criterio` varchar(229) DEFAULT NULL,
+  `estandar` varchar(248) DEFAULT NULL,
+  `prioridad` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+";
+mysqli_query($link,$crearestandaresTdic)or die ("un momento.".mysqli_error($link));
+$rellenaestandaresTdic="
+INSERT INTO `estandarestdic` (`id`, `curso`, `bloque`, `criterio`, `estandar`, `prioridad`) VALUES
+(4111, 4, 'Bloque 1: Ética y Estética e Interacción en la red', '1.    Adoptar conductas y hábitos que permitan la protección del individuo en su interacción en la red. ', '1.1.    Interactúa con hábitos de seguridad adecuados en entornos virtuales. ', ''),
+(4112, 4, 'Bloque 1: Ética y Estética e Interacción en la red', '1.    Adoptar conductas y hábitos que permitan la protección del individuo en su interacción en la red. ', '1.2.    Aplica políticas seguras de utilización de contraseñas para la protección de la información personal.', ''),
+(4121, 4, 'Bloque 1: Ética y Estética e Interacción en la red', '2.    Acceder a servicios de intercambio y publicación de información digital con criterios de seguridad y uso responsable.', '2.1.    Realiza actividades de intercambio de información con responsabilidad sobre conceptos como la propiedad intelectual.', ''),
+(4131, 4, 'Bloque 1: Ética y Estética e Interacción en la red', '3.    Reconocer y comprender los derechos de los materiales alojados en la web.', '3.1.    Consulta distintas fuentes y navega conociendo la importancia de la identidad digital y los tipos de fraude de la web.', ''),
+(4132, 4, 'Bloque 1: Ética y Estética e Interacción en la red', '3.    Reconocer y comprender los derechos de los materiales alojados en la web.', '3.2.    Diferencia el concepto de materiales sujetos a derechos de autor y materiales de libre distribución y los usa de forma adecuada en sus producciones.', ''),
+(4211, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '1.    Conocer la arquitectura de un ordenador, identificando sus componentes básicos y describiendo sus características.', '1.1 Identifica componentes físicos de un ordenador, describiendo sus características técnicas y función en el conjunto.', ''),
+(4212, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '1.    Conocer la arquitectura de un ordenador, identificando sus componentes básicos y describiendo sus características.', '1.2  Describe las conexiones entre los componentes físicos de un ordenador.', ''),
+(4221, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '2.    Configurar y utilizar el sistema operativo identificando los elementos que lo componen y su función en el conjunto.', '2.1.    Diferencia los tipos de sistemas operativos describiendo sus características y elementos.', ''),
+(4222, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '2.    Configurar y utilizar el sistema operativo identificando los elementos que lo componen y su función en el conjunto.', '2.2.    Configura los elementos básicos del sistema operativo y de accesibilidad del equipo informático.', ''),
+(4223, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '2.    Configurar y utilizar el sistema operativo identificando los elementos que lo componen y su función en el conjunto.', '2.3.    Realiza operaciones básicas de organización y almacenamiento de la  información.', ''),
+(4224, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '2.    Configurar y utilizar el sistema operativo identificando los elementos que lo componen y su función en el conjunto.', '2.4.    Utiliza las aplicaciones de actualización y mantenimiento del sistema operativo con responsabilidad.', ''),
+(4231, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '3.    Gestionar la instalación y eliminación de software de propósito general.', '3.1.   Instala software de propósito general desde diversas fuentes como dispositivos físicos o internet.', ''),
+(4232, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '3.    Gestionar la instalación y eliminación de software de propósito general.', '3.2.    Desinstala aplicaciones utilizando las herramientas adecuadas con criterios de seguridad.', ''),
+(4241, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '4.    Analizar los elementos y sistemas que configuran la comunicación alámbrica e inalámbrica.', '4.1.   Identifica los dispositivos físicos necesarios para comunicar equipos en red, describiendo sus características y su función en el conjunto.', ''),
+(4242, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '4.    Analizar los elementos y sistemas que configuran la comunicación alámbrica e inalámbrica.', '4.2.    Describe las diferentes formas de conexión en la comunicación entre dispositivos digitales. ', ''),
+(4243, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '4.    Analizar los elementos y sistemas que configuran la comunicación alámbrica e inalámbrica.', '4.3.    Conoce los protocolos de comunicación entre equipos.', ''),
+(4244, 4, 'Bloque 2: Ordenadores, Sistemas Operativos y Redes', '4.    Analizar los elementos y sistemas que configuran la comunicación alámbrica e inalámbrica.', '4.4.    Administra con responsabilidad y seguridad la comunicación entre equipos y sistemas.', ''),
+(4311, 4, 'Bloque 3: Organización, diseño y producción de información digital', '1.    Utilizar aplicaciones informáticas de escritorio para la producción de documentos. ', '1.1.    Elabora y maqueta documentos de texto con aplicaciones informáticas que facilitan la inclusión de tablas, imágenes, fórmulas, gráficos, así como otras posibilidades de diseño e interactúa con otras características del programa. ', ''),
+(4312, 4, 'Bloque 3: Organización, diseño y producción de información digital', '1.    Utilizar aplicaciones informáticas de escritorio para la producción de documentos. ', '1.2.    Produce informes que requieren el empleo de hojas de cálculo, que incluyan resultados textuales, numéricos y gráficos.', ''),
+(4313, 4, 'Bloque 3: Organización, diseño y producción de información digital', '1.    Utilizar aplicaciones informáticas de escritorio para la producción de documentos. ', '1.3.    Diseña bases de datos sencillas y utiliza su funcionalidad para consultar datos, organizar la información y generar documentos.', ''),
+(4321, 4, 'Bloque 3: Organización, diseño y producción de información digital', '2.    Elaborar contenidos de imagen, audio y video y desarrollar capacidades para integrarlos en diversas producciones.', '2.1.    Integra elementos multimedia, imagen y texto en la elaboración de presentaciones adecuando el diseño y maquetación al mensaje y al público objetivo al que va dirigido.', ''),
+(4322, 4, 'Bloque 3: Organización, diseño y producción de información digital', '2.    Elaborar contenidos de imagen, audio y video y desarrollar capacidades para integrarlos en diversas producciones.', '2.2.    Emplea dispositivos de captura de imagen, audio y video guardando los archivos en el formato adecuado.', ''),
+(4323, 4, 'Bloque 3: Organización, diseño y producción de información digital', '2.    Elaborar contenidos de imagen, audio y video y desarrollar capacidades para integrarlos en diversas producciones.', '2.3.    Edita mediante software específico imágenes y crea nuevos materiales en diversos formatos con responsabilidad y autonomía.', ''),
+(4324, 4, 'Bloque 3: Organización, diseño y producción de información digital', '2.    Elaborar contenidos de imagen, audio y video y desarrollar capacidades para integrarlos en diversas producciones.', '2.4.    Realiza producciones sencillas integrando vídeo y audio, utilizando programas de edición de archivos multimedia', ''),
+(4331, 4, 'Bloque 3: Organización, diseño y producción de información digital', '3.    Utilizar aplicaciones y herramientas de desarrollo en dispositivos móviles para resolver problemas concretos.', '3.1.   Utiliza de forma adecuada distintas aplicaciones para dispositivos móviles de uso cotidiano y del entorno educativo.', ''),
+(4332, 4, 'Bloque 3: Organización, diseño y producción de información digital', '3.    Utilizar aplicaciones y herramientas de desarrollo en dispositivos móviles para resolver problemas concretos.', '3.2.    Diseña y crea aplicaciones sencillas para dispositivos móviles.', ''),
+(4411, 4, 'Bloque 4: Seguridad Informática', '1.    Adoptar conductas de seguridad activa y pasiva en la protección de datos y en el intercambio de información ', '1.1.    Identifica las amenazas a la seguridad los equipos informáticos, su capacidad de propagación y describe las consecuencias que pueden tener tanto para el equipo informático como para los datos.', ''),
+(4412, 4, 'Bloque 4: Seguridad Informática', '1.    Adoptar conductas de seguridad activa y pasiva en la protección de datos y en el intercambio de información ', '1.2.    Emplea medidas de seguridad activa y pasiva con asiduidad y hábitos de protección adecuados.', ''),
+(4413, 4, 'Bloque 4: Seguridad Informática', '1.    Adoptar conductas de seguridad activa y pasiva en la protección de datos y en el intercambio de información ', '1.3.    Utiliza de forma responsable distintos programas y aplicaciones de protección de equipos informáticos.', ''),
+(4421, 4, 'Bloque 4: Seguridad Informática', '2.    Reconocer los peligros derivados de la navegación por internet y adoptar conductas de seguridad en la navegación.', '2.1.    Identifica los principales peligros derivados de la navegación por internet y sus consecuencias en el usuario, en el equipo y en los datos.', ''),
+(4422, 4, 'Bloque 4: Seguridad Informática', '2.    Reconocer los peligros derivados de la navegación por internet y adoptar conductas de seguridad en la navegación.', '2.2.    Emplea medidas adecuadas de protección en la navegación por internet.', ''),
+(4423, 4, 'Bloque 4: Seguridad Informática', '2.    Reconocer los peligros derivados de la navegación por internet y adoptar conductas de seguridad en la navegación.', '2.3.    Describe la importancia de la actualización del software de protección y el empleo de antimalware y de cortafuegos para garantizar la seguridad.', ''),
+(4424, 4, 'Bloque 4: Seguridad Informática', '2.    Reconocer los peligros derivados de la navegación por internet y adoptar conductas de seguridad en la navegación.', '2.4.    Conecta con redes WIFI desde distintos dispositivos de forma segura y desarrolla hábitos de conducta adecuados.', ''),
+(4511, 4, 'Bloque 5: Publicación y difusión de contenidos', '1.    Utilizar diversos recursos de intercambio de información conociendo las características y la comunicación o conexión entre ellos.', '1.1.    Realiza actividades que requieren compartir recursos en redes locales y virtuales.', ''),
+(4512, 4, 'Bloque 5: Publicación y difusión de contenidos', '1.    Utilizar diversos recursos de intercambio de información conociendo las características y la comunicación o conexión entre ellos.', '1.2.    Utiliza los recursos que nos ofrecen las nuevas tecnologías y sucesivos desarrollos para la publicación y difusión de contenidos.', ''),
+(4521, 4, 'Bloque 5: Publicación y difusión de contenidos', '2.    Elaborar y publicar contenidos en la web integrando información textual, numérica, sonora y gráfica.', '2.1.    Integra y organiza elementos textuales y gráficos en estructuras hipertextuales.', ''),
+(4522, 4, 'Bloque 5: Publicación y difusión de contenidos', '2.    Elaborar y publicar contenidos en la web integrando información textual, numérica, sonora y gráfica.', '2.2.    Diseña páginas web y conoce los protocolos de publicación, bajo estándares adecuados y con respeto a los derechos de propiedad.', ''),
+(4523, 4, 'Bloque 5: Publicación y difusión de contenidos', '2.    Elaborar y publicar contenidos en la web integrando información textual, numérica, sonora y gráfica.', '2.3.    Elabora un espacio web (blog, wiki, …) para la publicación y difusión de contenidos mediante el uso de herramientas web gratuitas.', ''),
+(4531, 4, 'Bloque 5: Publicación y difusión de contenidos', '3.    Conocer los estándares de publicación y emplearlos en la producción de páginas web y herramientas TIC de carácter social.', '3.1.    Aplica los estándares de publicación de contenidos web.', ''),
+(4532, 4, 'Bloque 5: Publicación y difusión de contenidos', '3.    Conocer los estándares de publicación y emplearlos en la producción de páginas web y herramientas TIC de carácter social.', '3.2.    Participa colaborativamente en diversas herramientas TIC de carácter social y gestiona las propias de forma responsable y autónoma.', ''),
+(4611, 4, 'Bloque 6: Internet, Redes Sociales, hiperconexión', '1.    Conocer las características básicas de internet y los servicios y posibilidades que ofrece.', '1.1.    Describe los servicios que ofrece internet y sus posibilidades tanto en el ámbito educativo como en el profesional, personal y de ocio.', ''),
+(4612, 4, 'Bloque 6: Internet, Redes Sociales, hiperconexión', '1.    Conocer las características básicas de internet y los servicios y posibilidades que ofrece.', '1.2.    Conoce y explica los protocolos de comunicación, así como la denominación de los elementos propios de internet. ', ''),
+(4621, 4, 'Bloque 6: Internet, Redes Sociales, hiperconexión', '2.    Desarrollar hábitos en el uso de herramientas que permitan la accesibilidad a las producciones desde diversos dispositivos móviles.', '2.1.    Accede a servicios web y plataformas desde diversos dispositivos electrónicos.', ''),
+(4622, 4, 'Bloque 6: Internet, Redes Sociales, hiperconexión', '2.    Desarrollar hábitos en el uso de herramientas que permitan la accesibilidad a las producciones desde diversos dispositivos móviles.', '2.2.    Realiza intercambio de información de forma segura en distintas plataformas en las que está registrado y que ofrecen servicios de formación, ocio, etc', ''),
+(4623, 4, 'Bloque 6: Internet, Redes Sociales, hiperconexión', '2.    Desarrollar hábitos en el uso de herramientas que permitan la accesibilidad a las producciones desde diversos dispositivos móviles.', '2.3.    Sincroniza la información entre un dispositivo móvil y otro dispositivo.', ''),
+(4631, 4, 'Bloque 6: Internet, Redes Sociales, hiperconexión', '3.    Emplear el sentido crítico y desarrollar hábitos adecuados en el uso e intercambio de la información a través de redes sociales y plataformas.', '3.1.    Participa activamente en redes sociales con criterios de seguridad y responsabilidad.', ''),
+(4641, 4, 'Bloque 6: Internet, Redes Sociales, hiperconexión', '4.    Publicar y relacionar mediante hiperenlaces información en canales de contenidos multimedia, presentaciones, imagen, audio y video.', '4.1.    Emplea canales de distribución de contenidos multimedia para alojar materiales propios y enlazarlos con otras producciones, respetando los derechos de autor.', ''),
+(5111, 5, 'Bloque 1: La Sociedad de la Información', '1. Analizar y valorar las influencias de las tecnologías de la información y la comunicación en la transformación de la sociedad actual, tanto en los ámbitos de la adquisición del conocimiento como en los de la producción.', '1.1. Describe las diferencias entre lo que se considera sociedad de la información y sociedad del conocimiento.', ''),
+(5112, 5, 'Bloque 1: La Sociedad de la Información', '1. Analizar y valorar las influencias de las tecnologías de la información y la comunicación en la transformación de la sociedad actual, tanto en los ámbitos de la adquisición del conocimiento como en los de la producción.', '1.2. Valora la influencia de las tecnologías en el avance de la sociedad de la información y la comunicación en actividades de la vida diaria como la educación y el comercio.', ''),
+(5113, 5, 'Bloque 1: La Sociedad de la Información', '1. Analizar y valorar las influencias de las tecnologías de la información y la comunicación en la transformación de la sociedad actual, tanto en los ámbitos de la adquisición del conocimiento como en los de la producción.', '1.3. Explica qué nuevos sectores económicos han aparecido como consecuencia de la generalización de las tecnologías de la información y la comunicación.', ''),
+(5211, 5, 'Bloque 2: Arquitectura de Ordenadores', '1. Configurar ordenadores y equipos informáticos identificando los subsistemas que los componen, describiendo sus características y relacionando cada elemento con las prestaciones del conjunto.', '1.1. Describe las características de los subsistemas que componen un ordenador identificando sus principales parámetros de funcionamiento.', ''),
+(5212, 5, 'Bloque 2: Arquitectura de Ordenadores', '1. Configurar ordenadores y equipos informáticos identificando los subsistemas que los componen, describiendo sus características y relacionando cada elemento con las prestaciones del conjunto.', '1.2. Realiza esquemas de interconexión de los bloques funcionales de un ordenador describiendo la contribución de cada uno de ellos al funcionamiento integral del sistema.', ''),
+(5213, 5, 'Bloque 2: Arquitectura de Ordenadores', '1. Configurar ordenadores y equipos informáticos identificando los subsistemas que los componen, describiendo sus características y relacionando cada elemento con las prestaciones del conjunto.', '1.3. Diferencia dispositivos de almacenamiento masivo utilizados en sistemas de ordenadores reconociendo su importancia en la custodia de la información.', ''),
+(5214, 5, 'Bloque 2: Arquitectura de Ordenadores', '1. Configurar ordenadores y equipos informáticos identificando los subsistemas que los componen, describiendo sus características y relacionando cada elemento con las prestaciones del conjunto.', '1.4. Reconoce los tipos de memoria utilizados en ordenadores analizando los parámetros que las definen y su aportación al rendimiento del conjunto.', ''),
+(5221, 5, 'Bloque 2: Arquitectura de Ordenadores', '2. Instalar y utilizar software de propósito general y de aplicación vinculado al sistema operativo evaluando sus características y entornos de aplicación.', '2.1. Instala sistemas operativos y programas de aplicación para la resolución de problemas en ordenadores personales y dispositivos móviles siguiendo instrucciones del fabricante.', ''),
+(5222, 5, 'Bloque 2: Arquitectura de Ordenadores', '2. Instalar y utilizar software de propósito general y de aplicación vinculado al sistema operativo evaluando sus características y entornos de aplicación.', '2.2. Configura los elementos básicos del sistema operativo y de accesibilidad del equipo informático.', ''),
+(5223, 5, 'Bloque 2: Arquitectura de Ordenadores', '2. Instalar y utilizar software de propósito general y de aplicación vinculado al sistema operativo evaluando sus características y entornos de aplicación.', '2.3. Gestiona el almacenamiento de la información y de las aplicaciones en dispositivos móviles.', ''),
+(5311, 5, 'Bloque 3: Software para Sistemas Informáticos', '1. Utilizar aplicaciones informáticas de escritorio o web, como instrumentos de resolución de problemas específicos.', '1.1. Elabora informes de texto que integren texto e imágenes aplicando las posibilidades de las aplicaciones y teniendo en cuenta el destinatario.', ''),
+(5312, 5, 'Bloque 3: Software para Sistemas Informáticos', '1. Utilizar aplicaciones informáticas de escritorio o web, como instrumentos de resolución de problemas específicos.', '1.2. Elabora presentaciones que integren texto, imágenes y elementos multimedia, adecuando el mensaje al público objetivo al que está destinado.', ''),
+(5313, 5, 'Bloque 3: Software para Sistemas Informáticos', '1. Utilizar aplicaciones informáticas de escritorio o web, como instrumentos de resolución de problemas específicos.', '1.3. Resuelve problemas que requieran la utilización de hojas de cálculo generando resultados textuales, numéricos y gráficos.', ''),
+(5314, 5, 'Bloque 3: Software para Sistemas Informáticos', '1. Utilizar aplicaciones informáticas de escritorio o web, como instrumentos de resolución de problemas específicos.', '1.4. Diseña bases de datos sencillas y/o extrae información, realizando consultas, formularios e informes.', ''),
+(5315, 5, 'Bloque 3: Software para Sistemas Informáticos', '1. Utilizar aplicaciones informáticas de escritorio o web, como instrumentos de resolución de problemas específicos.', '1.5. Usa aplicaciones informáticas de escritorio en dispositivos móviles.', ''),
+(5321, 5, 'Bloque 3: Software para Sistemas Informáticos', '2. Comunicar ideas mediante el uso de programas de diseño de elementos gráficos en 2D y 3D.', '2.1. Diseña elementos gráficos en 2D y 3D para comunicar ideas.', ''),
+(5331, 5, 'Bloque 3: Software para Sistemas Informáticos', '3. Elaborar y editar contenidos de imagen, audio y vídeo y desarrollar capacidades para integrarlos en diversas producciones.', '3.1. Edita mediante software específico imágenes y crea nuevos materiales en diversos formatos con responsabilidad y autonomía.', ''),
+(5332, 5, 'Bloque 3: Software para Sistemas Informáticos', '3. Elaborar y editar contenidos de imagen, audio y vídeo y desarrollar capacidades para integrarlos en diversas producciones.', '3.2. Realiza pequeñas películas integrando sonido, vídeo e imágenes, utilizando programas de edición de archivos multimedia.', ''),
+(5333, 5, 'Bloque 3: Software para Sistemas Informáticos', '3. Elaborar y editar contenidos de imagen, audio y vídeo y desarrollar capacidades para integrarlos en diversas producciones.', '3.3. Produce y edita materiales multimedia mediante aplicaciones de dispositivos móviles.', ''),
+(5411, 5, 'Bloque 4: Redes de ordenadores', '1. Analizar las principales topologías utilizadas en el diseño de redes de ordenadores, relacionándolas con el área de aplicación y con las tecnologías empleadas.', '1.1. Dibuja esquemas de configuración de pequeñas redes locales seleccionando las tecnologías en función del espacio físico disponible.', ''),
+(5412, 5, 'Bloque 4: Redes de ordenadores', '1. Analizar las principales topologías utilizadas en el diseño de redes de ordenadores, relacionándolas con el área de aplicación y con las tecnologías empleadas.', '1.2. Describe los diferentes tipos de cableados utilizados en redes de datos.', ''),
+(5413, 5, 'Bloque 4: Redes de ordenadores', '1. Analizar las principales topologías utilizadas en el diseño de redes de ordenadores, relacionándolas con el área de aplicación y con las tecnologías empleadas.', '1.3. Realiza un análisis comparativo entre tecnología cableada e inalámbrica indicando posibles ventajas e inconvenientes.', ''),
+(5421, 5, 'Bloque 4: Redes de ordenadores', '2. Analizar la función de los equipos de conexión que permiten realizar configuraciones de redes y su interconexión con redes de área extensa.', '2.1. Explica la funcionalidad de los diferentes elementos que permiten configurar redes de datos indicando sus ventajas en inconvenientes principales.', ''),
+(5422, 5, 'Bloque 4: Redes de ordenadores', '2. Analizar la función de los equipos de conexión que permiten realizar configuraciones de redes y su interconexión con redes de área extensa.', '2.2. Configura los parámetros básicos de una red en función de sus características.', ''),
+(5431, 5, 'Bloque 4: Redes de ordenadores', '3. Describir los niveles del modelo OSI, relacionándolos con sus funciones en una red informática.', '3.1. Elabora un esquema de cómo se realiza la comunicación entre los niveles OSI de dos equipos remotos.', ''),
+(5511, 5, 'Bloque 5: Programación', '1. Aplicar algoritmos a la resolución de los problemas más frecuentes que se presentan al trabajar con estructuras de datos.', '1.1. Elabora diagramas de flujo de algoritmos para resolver problemas sencillos.', ''),
+(5512, 5, 'Bloque 5: Programación', '1. Aplicar algoritmos a la resolución de los problemas más frecuentes que se presentan al trabajar con estructuras de datos.', '1.2. Desarrolla algoritmos que permitan resolver problemas aritméticos sencillos.', ''),
+(5521, 5, 'Bloque 5: Programación', '2. Analizar y resolver problemas de tratamiento de información dividiéndolos en subproblemas y definiendo algoritmos que los resuelven mediante los elementos propios del lenguaje de programación utilizado.', '2.1. Escribe programas que incluyan bucles de programación para solucionar problemas que impliquen la división del conjunto en partes más pequeñas.', ''),
+(5522, 5, 'Bloque 5: Programación', '2. Analizar y resolver problemas de tratamiento de información dividiéndolos en subproblemas y definiendo algoritmos que los resuelven mediante los elementos propios del lenguaje de programación utilizado.', '2.2. Obtiene el resultado de seguir un pequeño programa escrito en un código determinado, partiendo de determinadas condiciones.', ''),
+(5531, 5, 'Bloque 5: Programación', '3. Realizar pequeños programas de aplicación, utilizando la sintaxis y la semántica de un lenguaje de programación determinado, aplicándolos a la solución de problemas reales.', '3.1. Utiliza los elementos de la sintaxis de un lenguaje de programación proponiendo ejemplos concretos.', ''),
+(5532, 5, 'Bloque 5: Programación', '3. Realizar pequeños programas de aplicación, utilizando la sintaxis y la semántica de un lenguaje de programación determinado, aplicándolos a la solución de problemas reales.', '3.2. Realiza programas de aplicación sencillos en un lenguaje determinado que solucionen problemas de la vida real.', ''),
+(5541, 5, 'Bloque 5: Programación', '4. Realizar aplicaciones sencillas para su uso en dispositivos móviles mediante herramientas de desarrollo para resolver problemas concretos.', '4.1. Diseña y crea aplicaciones sencillas para dispositivos móviles.', ''),
+(5542, 5, 'Bloque 5: Programación', '4. Realizar aplicaciones sencillas para su uso en dispositivos móviles mediante herramientas de desarrollo para resolver problemas concretos.', '4.2. Instala y gestiona de forma responsable el uso de aplicaciones en dispositivos móviles.', '');
+
+";
+mysqli_query($link,utf8_decode($rellenaestandaresTdic))or die ("algo fallo creando la tabla de estandares de Tecnologías de la Información...".mysqli_error($link));
+
 //ESTANDARES MATEMATICAS ACADEMICAS
 $crearestandaresMatAcademicas="
 
@@ -287,7 +386,8 @@ INSERT INTO `estandaresmatacademicas` (`id`, `curso`, `bloque`, `criterio`, `est
 (4543, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.3.    Calcula e interpreta los parámetros estadísticos de una distribución de datos utilizando medios tecnológicos, si fuera preciso.', ''),
 (4544, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.4.    Realiza un muestreo y distingue muestras representativas de las que no lo son.', ''),
 (4545, 4, 'Bloque 5: Estadística y Probabilidad', '4. Elaborar e interpretar tablas y gráficos estadísticos, así como los parámetros estadísticos más usuales, en distribuciones unidimensionales y bidimensionales, utilizando los medios más adecuados y valorando cualitativamente la representatividad de las ', '4.5.    Representa diagramas de dispersión e interpreta la relación existente entre las variables.', '');
-";)or die ("algo fallo creando la tabla de estandares de Matemáticas Académicas...".mysqli_error($link));
+";
+mysqli_query($link,utf8_decode($rellenaestandaresMatAcademicas))or die ("algo fallo creando la tabla de estandares de Matemáticas Académicas...".mysqli_error($link));
 
 //ESTANDARES MATEMATICAS APLICADAS
 $crearestandaresMatAplicadas="
@@ -419,7 +519,7 @@ INSERT INTO `estandaresmataplicadas` (`id`, `curso`, `bloque`, `criterio`, `esta
 (4532, 4, 'Bloque 5: Estadística y Probabilidad', '3.    Calcular probabilidades simples y compuestas para resolver problemas de la vida cotidiana, utilizando la regla de Laplace en combinación con técnicas de recuento como los diagramas de árbol y las tablas de contingencia.', '3.2.    Calcula la probabilidad de sucesos compuestos sencillos en los que intervengan dos experiencias aleatorias simultáneas o consecutivas.', '');
 
 ";
-mysqli_query($link,$rellenaestandaresMatAplicadas)or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
+mysqli_query($link,utf8_decode($rellenaestandaresMatAplicadas))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 
 //ESTANDARES MATEMATICAS
 $crearestandaresMatematicas="
@@ -553,7 +653,7 @@ INSERT INTO `estandaresmatematicas` (`id`, `curso`, `bloque`, `criterio`, `estan
 (1522, 1, 'Bloque 5: Estadística', '2.    Utilizar herramientas tecnológicas para organizar datos, generar gráficas estadísticas, calcular parámetros relevantes y comunicar los resultados obtenidos que respondan a las preguntas formuladas previamente sobre la situación estudiada.', '2.2.    Utiliza las tecnologías de la información y de la comunicación para comunicar información resumida y relevante sobre una variable estadística analizada.', '');
 
 ";
-mysqli_query($link,$rellenaestandaresMatematicas)or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
+mysqli_query($link,utf8_decode($rellenaestandaresMatematicas))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 
 
 //ESTANDARES CULTURA CLASICA
@@ -675,7 +775,7 @@ INSERT INTO `estandarescclasica` (`id`, `curso`, `bloque`, `criterio`, `estandar
 (4741, 4, 'Bloque 7: Pervivencia en la actualidad', '4. Realizar trabajos de investigación sobre la pervivencia de la civilización clásica en el entorno utilizando las tecnologías de la información y la comunicación.', '4.1. Utiliza las Tecnologías de la Información y la Comunicación para recoger información y realizar trabajos de investigación sobre la pervivencia de la civilización clásica en nuestra cultura.', '');
 
 ";
-mysqli_query($link,$rellenaestandaresCClasica)or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
+mysqli_query($link,utf8_decode($rellenaestandaresCClasica))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 
 //ESTANDARES TECNOLOGIA
 $crearestandaresTecnologia="
@@ -878,7 +978,7 @@ INSERT INTO `estandarestecnologia` (`id`, `curso`, `bloque`, `criterio`, `estand
 (4621, '4', '6. Tecnología y Sociedad', '2. Analizar objetos técnicos y tecnológicos y su relación con el entorno, interpretando su influencia en la sociedad y la evolución tecnológica.', '2.1. Analiza objetos técnicos y tecnológicos desde varios puntos de vista, como el funcional, socioeconómico, técnico y formal.', ''),
 (4631, '4', '6. Tecnología y Sociedad', '3. Potenciar el uso responsable de los recursos naturales para uso industrial y particular, fomentando hábitos que ayuden a la sostenibilidad del medio ambiente.', '3.1. Reconoce las consecuencias medioambientales de la actividad tecnológica y realiza propuestas para reducir su impacto.', '');";
 
-mysqli_query($link,$rellenaestandaresTecnologia)or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
+mysqli_query($link,utf8_decode($rellenaestandaresTecnologia))or die ("algo fallo creando la tabla de estandares de Tecnología...".mysqli_error($link));
 
 //ESTANDARES ROBOTICA
 $crearestandaresRobotica="
@@ -917,7 +1017,7 @@ $rellenaestandaresRobotica="INSERT INTO `estandaresrobotica` (`id`, `curso`, `bl
 (4461, 4, '4. ROBÓTICA', '6. Aprender a trabajar en equipo con actitudes de respeto y tolerancia hacia las ideas de los demás participando activamente en la consecución de los objetivos planteados.', '6.1. Trabaja en grupo de forma participativa y creativa, buscando información adicional y aportando ideas para el diseño y construcción de un robot.', '');
 ";
 
-mysqli_query($link,$rellenaestandaresRobotica)or die ("algo fallo...");
+mysqli_query($link,utf8_decode($rellenaestandaresRobotica))or die ("algo fallo...");
 $creargrupos="CREATE TABLE IF NOT EXISTS gruposinf(
 id int(2)unsigned NOT NULL auto_increment,
 `nombre` text NOT NULL ,
@@ -1360,7 +1460,7 @@ INSERT INTO `estandareslengua` (`id`, `curso`, `bloque`, `criterio`, `estandar`,
 (4463, 4, 'Bloque 4: Educación literaria', '6. Consultar y citar adecuadamente fuentes de información variadas para realizar un trabajo académico en soporte papel o digital sobre un tema del currículo de literatura, adoptando un punto de vista crítico y personal y utilizando las tecnologías de la información', '6.3. Utiliza recursos variados de las Tecnologías de la Información y la Comunicación para la realización de sus trabajos académicos.', '');
 ";
 
-mysqli_query($link,$rellenaestandaresLengua)or die ("algo fallo creando los estandares de lengua...".mysqli_error($link));
+mysqli_query($link,utf8_decode($rellenaestandaresLengua))or die ("algo fallo creando los estandares de lengua...".mysqli_error($link));
 
 
 //ESTANDARES GEOGRAFÍA E HISTORIA
@@ -1878,7 +1978,7 @@ INSERT INTO `estandaresgeografiahistoria` (`id`, `curso`, `bloque`, `criterio`, 
 (41161, 4, 'Bloque 11. La relación entre el pasado, el presente y el futuro a través de la Historia y la Geografía', '6.    Valorar la progresiva interculturalidad del mundo actual.', '6.1.    Analiza el intercambio cultural a lo largo de la historia, y reconoce su impulso en las últimas décadas por la globalización.', ''),
 (41162, 4, 'Bloque 11. La relación entre el pasado, el presente y el futuro a través de la Historia y la Geografía', '6.    Valorar la progresiva interculturalidad del mundo actual.', '6.2.    Establece la relación entre conflictos armados  e intolerancia cultural, e identifica alguno en la actualidad.', '');
 ";
-mysqli_query($link,$rellenaestandaresGeografiahistoria)or die ("NO HE PODIDO RELLENAR LA TABLA DE ESTANDARES DE GEOGRAFIA E HISTORIA".mysqli_error($link));
+mysqli_query($link,utf8_decode($rellenaestandaresGeografiahistoria))or die ("NO HE PODIDO RELLENAR LA TABLA DE ESTANDARES DE GEOGRAFIA E HISTORIA".mysqli_error($link));
 mysqli_free_result;
 $creargrupos="CREATE TABLE IF NOT EXISTS gruposinf(
 id int(2)unsigned NOT NULL auto_increment,
@@ -2019,7 +2119,7 @@ INSERT INTO `materias` (`id`, `materia`, `codigo`, `curso`) VALUES
 (117, 'Griego II', 'griego', 6),
 (118, 'Geografía  ', 'geografiaoptativa', 6);
 ";
-mysqli_query($link,$llenarMaterias)or die ("No he podido rellenar la tabla de materias");
+mysqli_query($link,utf8_decode($llenarMaterias))or die ("No he podido rellenar la tabla de materias");
 mysqli_free_result;
 $crearEvaluacionGeneral="CREATE TABLE IF NOT EXISTS `evaluaciongeneral` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
